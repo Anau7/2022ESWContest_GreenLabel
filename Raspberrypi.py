@@ -83,17 +83,17 @@ def setServoPos(state):
     servoPin1 = 12   
     servoPin2 = 17   
     
-    SERVO_MAX_DUTY    = 12   # 서보의 최대(180도) 위치의 주기
-    SERVO_MIN_DUTY    = 3    # 서보의 최소(0도) 위치의 주기
+    SERVO_MAX_DUTY    = 12  
+    SERVO_MIN_DUTY    = 3   
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(servoPin1, GPIO.OUT)  # 서보핀 출력으로 설정
-    GPIO.setup(servoPin2, GPIO.OUT)  # 서보핀 출력으로 설정
+    GPIO.setup(servoPin1, GPIO.OUT) 
+    GPIO.setup(servoPin2, GPIO.OUT) 
 
-    servo1 = GPIO.PWM(servoPin1, 50)  # 서보핀을 PWM 모드 50Hz로 사용하기 (50Hz > 20ms)
-    servo2 = GPIO.PWM(servoPin2, 50)  # 서보핀을 PWM 모드 50Hz로 사용하기 (50Hz > 20ms)
+    servo1 = GPIO.PWM(servoPin1, 50)  
+    servo2 = GPIO.PWM(servoPin2, 50) 
     
-    servo1.start(0)  # 서보 PWM 시작 duty = 0, duty가 0이면 서보는 동작하지 않는다.
-    servo2.start(0)  # 서보 PWM 시작 duty = 0, duty가 0이면 서보는 동작하지 않는다.
+    servo1.start(0)  
+    servo2.start(0)  
     
     degree1 = 0
     degree2 = 0
@@ -104,14 +104,14 @@ def setServoPos(state):
     elif(state == "PE"):
         degree1 = 0
         degree2 = 180
-  # 각도(degree)를 duty로 변경한다.
+  
     duty1 = SERVO_MIN_DUTY+(degree1*(SERVO_MAX_DUTY-SERVO_MIN_DUTY)/180.0)
     duty2 = SERVO_MIN_DUTY+(degree2*(SERVO_MAX_DUTY-SERVO_MIN_DUTY)/180.0)
-  # duty 값 출력
+  
     print("Degree1: {} to {}(Duty1)".format(degree1, duty1))
     print("Degree2: {} to {}(Duty2)".format(degree2, duty2))
 
-  # 변경된 duty값을 서보 pwm에 적용
+  
     servo1.ChangeDutyCycle(duty1)
     servo2.ChangeDutyCycle(duty2)
 
